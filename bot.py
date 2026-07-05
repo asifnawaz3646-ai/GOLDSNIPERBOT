@@ -1,8 +1,12 @@
 import os
 import logging
+import asyncio
+import nest_asyncio  # NAYA
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 from telegram.request import HTTPXRequest
+
+nest_asyncio.apply() # NAYA - Loop fix ke liye
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.INFO)
 
@@ -41,15 +45,12 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         disable_web_page_preview=True
     )
 
-def main():
+async def main(): # wapas async kar diya
     request = HTTPXRequest(connect_timeout=30.0, read_timeout=30.0)
-    
     app = ApplicationBuilder().token(BOT_TOKEN).request(request).build()
-    
     app.add_handler(CommandHandler("start", start))
-    
     print("Bot running on Polling... ✅")
-    app.run_polling(allowed_updates=Update.ALL_TYPES)  # yahi final line hai
+    await app.run_polling(allowed_updates=Update.ALL_TYPES)
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main()) # wapas asyncio.run
