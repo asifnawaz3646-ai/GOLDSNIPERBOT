@@ -26,11 +26,12 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "📉 Tired of blowing accounts ??\n\n"
         "<b>Join Now GOLDSNIPER</b> - \n"
         
-        "Stop gambling. Start trading with a professional 👇\n\n"
+        "Start trading with a professional 👇\n\n"
+       
         f"🔔 {CHANNEL_LINK}\n"
     
         "❗ <b>IMPORTANT:</b>\n"
-        "After you subscribe, I'll tell you more about how you can start making money with trading alongside me."
+        "Subscribe and make profits with me."
     )
     await update.message.reply_text(text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode='HTML', disable_web_page_preview=True)
 
