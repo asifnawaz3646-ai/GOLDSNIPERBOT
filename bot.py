@@ -22,11 +22,10 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     ]
     text = (
         f"Hi, {user_name} 👋\n\n"
-        "😔 <b>Are you in LOSS?</b>\n"
-        "📉 Tired of blowing accounts and fake signals?\n\n"
-        "<b>Join Now GOLDSNIPER</b> - 9 Years of Pro Forex Trading\n"
-        "Recover accounts and turn them into profits.\n"
-        "High Accuracy daily Signals with proper SL & TP.\n\n"
+        "😔 <b>Are you in LOSS ?</b>\n"
+        "📉 Tired of blowing accounts ??\n\n"
+        "<b>Join Now GOLDSNIPER</b> - \n"
+        
         "Stop gambling. Start trading with a professional 👇\n\n"
         f"🔔 {CHANNEL_LINK}\n"
     
