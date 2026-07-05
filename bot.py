@@ -1,5 +1,6 @@
 import os
 import logging
+import asyncio
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 from telegram.request import HTTPXRequest
@@ -9,7 +10,6 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=lo
 BOT_TOKEN = os.getenv("BOT_TOKEN", "PASTE_YOUR_BOT_TOKEN_HERE")  
 CHANNEL_LINK = "https://t.me/FOREXEMIRE_UASSS"
 ADMIN_LINK = "https://t.me/asifnawaz3646"
-PORT = int(os.environ.get("PORT", 8443))
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_name = update.effective_user.first_name
@@ -42,7 +42,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         disable_web_page_preview=True
     )
 
-def main():
+async def main():
     # v21.6 me request yahan banegi
     request = HTTPXRequest(connect_timeout=30.0, read_timeout=30.0)
     
@@ -50,17 +50,8 @@ def main():
     
     app.add_handler(CommandHandler("start", start))
     
-    if os.getenv("RENDER") is None:
-        print("Bot running on Polling... ✅")
-        app.run_polling()
-    else:
-        print("Bot running on Webhook... ✅")
-        app.run_webhook(
-            listen="0.0.0.0",
-            port=PORT,
-            url_path=BOT_TOKEN,
-            webhook_url=f"https://YOUR_APP_NAME.onrender.com/{BOT_TOKEN}"
-        )
+    print("Bot running on Polling... ✅")
+    await app.run_polling()  # Background Worker ke liye yehi best hai
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
