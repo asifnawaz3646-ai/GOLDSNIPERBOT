@@ -1,28 +1,25 @@
 import os
 import logging
-import asyncio
-import nest_asyncio  # NAYA
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 from telegram.request import HTTPXRequest
 
-nest_asyncio.apply() # NAYA - Loop fix ke liye
-
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.INFO)
 
-BOT_TOKEN = os.getenv("BOT_TOKEN", "PASTE_YOUR_BOT_TOKEN_HERE")  
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+if not BOT_TOKEN:
+    raise ValueError("BOT_TOKEN environment variable nahi mila!")
+
 CHANNEL_LINK = "https://t.me/FOREXEMIRE_UASSS"
 ADMIN_LINK = "https://t.me/asifnawaz3646"
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_name = update.effective_user.first_name
-    
     keyboard = [
         [InlineKeyboardButton("📊 SUBSCRIBE 🤝", url=CHANNEL_LINK)],
         [InlineKeyboardButton("📈 FREE SIGNALS 📊", url=CHANNEL_LINK)],
         [InlineKeyboardButton("💬 DM ME", url=ADMIN_LINK)]
     ]
-    
     text = (
         f"Hi, {user_name} 👋\n\n"
         "😔 <b>Are you in LOSS?</b>\n"
@@ -37,20 +34,15 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "❗ <b>IMPORTANT:</b>\n"
         "After you subscribe, I'll tell you more about how you can start making money with trading alongside me."
     )
-    
-    await update.message.reply_text(
-        text, 
-        reply_markup=InlineKeyboardMarkup(keyboard), 
-        parse_mode='HTML',
-        disable_web_page_preview=True
-    )
+    await update.message.reply_text(text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode='HTML', disable_web_page_preview=True)
 
-async def main(): # wapas async kar diya
+def main():
     request = HTTPXRequest(connect_timeout=30.0, read_timeout=30.0)
     app = ApplicationBuilder().token(BOT_TOKEN).request(request).build()
     app.add_handler(CommandHandler("start", start))
     print("Bot running on Polling... ✅")
-    await app.run_polling(allowed_updates=Update.ALL_TYPES)
+    # YE LINE SABSE IMPORTANT HAI
+    app.run_polling(allowed_updates=Update.ALL_TYPES)
 
 if __name__ == "__main__":
-    asyncio.run(main()) # wapas asyncio.run
+    main()
