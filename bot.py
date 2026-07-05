@@ -1,6 +1,5 @@
 import os
 import logging
-import asyncio
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 from telegram.request import HTTPXRequest
@@ -42,8 +41,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         disable_web_page_preview=True
     )
 
-async def main():
-    # v21.6 me request yahan banegi
+def main():
     request = HTTPXRequest(connect_timeout=30.0, read_timeout=30.0)
     
     app = ApplicationBuilder().token(BOT_TOKEN).request(request).build()
@@ -51,7 +49,7 @@ async def main():
     app.add_handler(CommandHandler("start", start))
     
     print("Bot running on Polling... ✅")
-    await app.run_polling()  # Background Worker ke liye yehi best hai
+    app.run_polling(allowed_updates=Update.ALL_TYPES)  # yahi final line hai
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    main()
