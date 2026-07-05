@@ -29,7 +29,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "Start trading with a professional 👇\n\n"
        
         f"🔔 {CHANNEL_LINK}\n"
-    
+
+        
         "❗ <b>IMPORTANT:</b>\n"
         "Subscribe and make profits with me."
     )
