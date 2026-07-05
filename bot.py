@@ -29,8 +29,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "High Accuracy daily Signals with proper SL & TP.\n\n"
         "Stop gambling. Start trading with a professional 👇\n\n"
         f"🔔 {CHANNEL_LINK}\n"
-        f"🔔 {CHANNEL_LINK}\n"
-        f"🔔 {CHANNEL_LINK}\n\n"
+    
         "❗ <b>IMPORTANT:</b>\n"
         "After you subscribe, I'll tell you more about how you can start making money with trading alongside me."
     )
