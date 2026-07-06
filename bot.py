@@ -11,7 +11,7 @@ if not BOT_TOKEN:
     raise ValueError("BOT_TOKEN environment variable nahi mila!")
 
 CHANNEL_LINK = "https://t.me/FOREXEMIRE_UASSS"
-ADMIN_LINK = "https://t.me/asifnawaz3646"
+ADMIN_LINK = "https://t.me/XAUUSBLOWPIPS"
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_name = update.effective_user.first_name
